@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Information</title>
+</head>
+<body>
+  <h2>My contact details</h2>
+  <p>Address : Analipseos 9, Thessaloniki</p>
+  <p>Email : ziposc7@outlook.com</p>
+  <hr>
+
+  <!-- Feedback form -->
+  <h3>Send us some feedback!</h3>
+  <form action="test.html" method="POST">
+    <table>
+      <tr>
+        <td><label for="userName">Name: </label></td>
+        <td><input type="text" id="userName"></td>
+      </tr>
+      <tr>
+        <td><label for="regarding">Regarding: </label></td>
+        <td>
+          <select name="regarding" id="regarding">
+            <option value="generalFeedback">General feedback</option>
+            <option value="featureSuggestion">Feature suggestion</option>
+            <option value="bugReporting">Report a bug</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <label for="userMessage">Your message: </label><br>
+    <textarea name="userMessage" rows="8" cols="50"></textarea><br>
+    <input type="file" name="userFile" accept="image/* , video/*" multiple>
+    <input type="submit">
+  </form>
+</body>
+</html>
