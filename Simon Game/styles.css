@@ -10,6 +10,7 @@ body {
   margin:  5%;
 }
 
+/* Container of the buttons */
 .container {
   display: block;
   margin: auto;
@@ -17,19 +18,14 @@ body {
 
 }
 
+/* Buttons */
 .btn {
-  margin: 25px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
   border: 10px solid black;
   border-radius: 20%;
-}
-
-
-.game-over {
-  background-color: red;
-  opacity: 0.8;
+  display: inline-block;
+  height: 200px;
+  margin: 25px;
+  width: 200px;
 }
 
 .red {
@@ -51,6 +47,7 @@ body {
 /* Animations */
 
 .pressed {
+  background-color: rgb(128, 128, 128);
   background-color: rgba(128, 128, 128, 0.6);
   box-shadow: 0 0 20px white;
 }

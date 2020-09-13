@@ -25,6 +25,7 @@ body {
 }
 
 .winner {
+  opacity: 0;
   padding-top: 3%;
 }
 
@@ -41,7 +42,40 @@ body {
   font: 600 4rem 'Indie Flower', cursive;
 }
 
-/* Utility */
-.invisible {
-  opacity: 0;
+/* Animations */
+.visible {
+  -webkit-animation: fadeIn 2s ease-out forwards;
+  animation: fadeIn 2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    0%, 35% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blurred {
+  -webkit-animation: blur 1s ease;
+  animation: blur 1s ease;
+}
+
+@keyframes blur {
+  0%,
+  1%, 100% {
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(0px);
+  }
+
+  50% {
+    -webkit-filter: blur(40px);
+    -moz-filter: blur(40px);
+    -o-filter: blur(40px);
+    -ms-filter: blur(40px);
+  }
 }

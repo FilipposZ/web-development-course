@@ -1,0 +1,2 @@
+A classic Simon game.
+The page has four colored buttons, each producing a particular tone when it is activated. A round in the game consists of the page lighting up one button at random, after which the player must reproduce the sequence of buttons from the start of the game adding the new button last. As the game progresses, the sequence of buttons increases. The player loses if he clicks on a button that it's not in the correct sequence.
