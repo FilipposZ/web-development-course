@@ -1,5 +1,10 @@
 import React from 'react';
 
+/*
+ * The TakeNoteArea controlled component implements the add note function.
+ * The two inputs title and content are controlled via the note state.
+ * When the user adds the note, the title and content are reset.
+ */
 function TakeNoteArea(props) {
   const [note, setNote] = React.useState({title: "", content: ""});
 
