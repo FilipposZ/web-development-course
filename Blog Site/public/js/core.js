@@ -1,3 +1,5 @@
+
+//Adds the active bootstrap class to the navbar menu item which is displayed
 let path = window.location.pathname;
 if (path === '/contact') {
   $('.nav-link[href="/contact"]').addClass('active');

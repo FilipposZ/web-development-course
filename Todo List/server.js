@@ -4,23 +4,24 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 const app = express();
 
-let day = getDateAndFormat();
-
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-mongoose.connect('mongodb+srv://admin-filipposz:jBO5pyf69650SZva@cluster0-igwul.mongodb.net/todolistDB', {
+//Connect to the database
+mongoose.connect('mongodb://localhost:27017/todolistDB', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
 
+// Create the database models of the list items and the list
 const todoItemSchema = new mongoose.Schema({ name: String })
 const TodoItem = mongoose.model('TodoItem', todoItemSchema);
 
 const listSchema = new mongoose.Schema({ name: String, items: [todoItemSchema] })
 const List = mongoose.model('List', listSchema);
 
+// The default list items and list
 const defaultItems = [
   {
     name: 'Welcome to your new list!'
@@ -35,12 +36,22 @@ const defaultItems = [
 
 const defaultList = 'today';
 
+// The home route redirects to the default list.
 app.get('/', (req, res) => {
   res.redirect(`/${defaultList}`);
 });
 
+/*
+ * This route has the following methods:
+ * get -  searches the database for the list 'listName'. If it is not
+ *        found, it is created with the default items, saved to the database and
+ *        rendered. If the list already exists, it is rendered.
+ * post - creates a new list item to the list 'listName'. Then, it renders
+ *        the new list.
+ */
 app.route('/:listName')
   .get((req, res) => {
+    // In the database the names of the lists are all lowercase
     const listName = _.lowerCase(req.params.listName);
     List.findOne({ name: listName }, (err, listFound) => {
       if (!err) {
@@ -69,7 +80,10 @@ app.route('/:listName')
   });
 
 
-
+/*
+ * This route deletes an item with the specified ID from the list 'listName'.
+ * Then it rerenders the list if no error occured.
+ */
 app.post('/:listName/delete', (req, res) => {
   const listName = _.lowerCase(req.params.listName);
   const itemID = req.body.itemID
@@ -82,21 +96,6 @@ app.post('/:listName/delete', (req, res) => {
   );
 });
 
-
-
-
 app.listen(3000, () => {
   console.log('Server is listening on port 3000..')
 });
-
-
-function getDateAndFormat() {
-  let today = new Date();
-  let options = {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long'
-  };
-
-  return today.toLocaleDateString('en-US', options);
-}

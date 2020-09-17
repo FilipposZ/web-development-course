@@ -9,10 +9,14 @@
   <link rel='stylesheet' href='css/styles.css'>
 </head>
 <body>
-  <div class='box' id='heading'>
+
+  <!-- The name of the list -->
+  <div class='container' id='heading'>
     <h1><%= listName %></h1>
   </div>
-  <div class='box'>
+
+  <!-- The list items. Each item is accompanied by a checkbox which deletes it -->
+  <div class='container'>
       <% listItems.forEach( item => { %>
         <form action='/<%= listName %>/delete' method='post'>
           <div class='item'>
@@ -22,6 +26,7 @@
         </form>
       <% }) %>
 
+    <!-- The add new list item form -->
     <form class='item' action='/<%= listName %>' method='post'>
       <input type='text' name='newItem' placeholder='New item' autocomplete='off'>
       <button type='submit'>+</button>

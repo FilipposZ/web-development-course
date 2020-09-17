@@ -16,13 +16,20 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
+// Connect to the mongo database
 mongoose.connect('mongodb://localhost:27017/blogDB', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
+
+// Create the model for the posts, containing a title and some content text.
 const postsSchema = new mongoose.Schema({ title: String, content: String });
 const Post = new mongoose.model('Post', postsSchema);
 
+/*
+ * The home route renders the home starting content and the posts in reverse
+ * chronological order.
+ */
 app.get('/', (req, res) => {
   Post.find((err, posts) => {
     if (!err) {
@@ -32,6 +39,7 @@ app.get('/', (req, res) => {
 
 });
 
+// The about and contact routes render placeholder content
 app.get('/about', (req, res) => {
   res.render('about', {startingContent: aboutContent});
 });
@@ -40,10 +48,12 @@ app.get('/contact', (req, res) => {
   res.render('contact', {startingContent: contactContent});
 });
 
+// The compose route renders a post creation form
 app.get('/compose', (req, res) => {
   res.render('compose');
 });
 
+// When the post creation form is submitted, save the new post in the database
 app.post('/compose', (req, res) => {
   const post = new Post({
     title: req.body.postTitle,
@@ -56,6 +66,7 @@ app.post('/compose', (req, res) => {
 
 });
 
+// This route searches the database for the post with id postID and if found renders it
 app.get('/posts/:postID', (req, res) => {
   const postID = req.params.postID;
   Post.findOne({ _id: postID }, (err, postFound) => {
@@ -66,6 +77,7 @@ app.get('/posts/:postID', (req, res) => {
 });
 
 
+// Start listening
 app.listen(3000, function() {
   console.log("Server started on port 3000..");
 });
